@@ -1,11 +1,48 @@
 {% extends 'flatpages/default.html' %}
 
+{% load custom_filters %}
+
 {% block title %}
 Новость
 {% endblock title %}
 
 {% block content %}
 <h1>Новость раз</h1>
+<h3>{{ time_now|date:'d M' }} </h3>
 <!--{{ post }}-->
-{{ newsid }}
+<!--{{ newsid }}-->
+{% if newsid %}
+      <table>
+          <tr>
+              <td>
+                    Заголовок
+              </td>
+              <td>
+                    Автор
+              </td>
+              <td>
+                    Новость
+              </td>
+              <td>
+                    Время публикации
+              </td>
+          </tr>
+          <tr>
+              <td>
+                    {{ newsid.post_had|stop_word }}
+              </td>
+              <td>
+                    {{ newsid.post_text|stop_word }}
+              </td>
+              <td>
+                    {{ newsid.post_auth }}
+              </td>
+              <td>
+                    {{ newsid.post_time|date:'d M Y h:m:s' }}
+              </tr>
+
+      </table>
+  {% else %}
+    <h2> Новостей нет! </h2>
+  {% endif%}
 {% endblock content %}

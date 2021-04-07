@@ -1,11 +1,43 @@
 {% extends 'flatpages/default.html' %}
 
+{% load custom_filters %}
+
 {% block title %}
-Новости
+Newses
 {% endblock title %}
 
 {% block content %}
-<h1>Новости</h1>
+  <h1>Новости</h1>
+  <h3>{{ time_now|date:'d M Y' }} </h3>
+  <h3>новостей:{{object_list|length}}</h3>
 <!--{{ object_list }}-->
-{{ newses }}
+  {% if object_list %}
+      <table>
+          <tr>
+              <td>
+                    Заголовок
+              </td>
+              <td>
+                    Новость
+              </td>
+              <td>
+                    Дата
+              </td>
+          </tr>
+      {% for newsid in object_list %}
+          <tr>
+              <td>
+                    {{ newsid.post_had|stop_word }}
+              </td>
+              <td>
+                    {{ newsid.post_text|truncatechars:50|stop_word }}
+              </td>
+              <td>
+                    {{ newsid.post_time|date:'d M Y' }}
+              </tr>
+      {% endfor %}
+      </table>
+  {% else %}
+    <h2> Новостей нет! </h2>
+  {% endif%}
 {% endblock content %}
