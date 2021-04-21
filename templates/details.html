@@ -1,0 +1,20 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}Детали новости{% endblock title %}
+
+<!-- В контенте на странице мы выводим сам товар, айди которого было передано в адрес -->
+{% block content %}
+<h1>{{ newsid.post_had }}
+
+</h1>
+
+<h2>Category :{{ Post.post_cat }}</h2>
+<h3>{{ newsid.post_time }}</h3>
+<t1>{{ newsid.post_text }}</t1>
+<h4>text by:{{ Post.post_auth }}</h4>
+
+
+<a href="{% url 'news_update' newsid.id %}"><u>Edit</u></a> <!-- добавим ссылку на редактирование товара-->
+<a href="{% url 'news_delete' newsid.id %}"><u> Delete </u></a> <!-- добавим ссылку на удаление товара-->
+{% endblock content %}

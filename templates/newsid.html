@@ -32,10 +32,10 @@
                     {{ newsid.post_had|stop_word }}
               </td>
               <td>
-                    {{ newsid.post_text|stop_word }}
+                    {{ newsid.post_auth }}
               </td>
               <td>
-                    {{ newsid.post_auth }}
+                    {{ newsid.post_text|stop_word }}
               </td>
               <td>
                     {{ newsid.post_time|date:'d M Y h:m:s' }}

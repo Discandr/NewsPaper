@@ -1,0 +1,56 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}Поиск новостей{% endblock title %}
+
+{% block content %}
+
+    <form method="GET">
+        {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+        <input type="submit" value="Найти">
+    </form>
+
+    <hr>
+        <table>
+            <tr>
+                <td>
+                    Заголовок
+                </td>
+                <td>
+                    Автор
+                </td>
+                <td>
+                    Новость
+                </td>
+                <td>
+                    Дата публикации
+                </td>
+            </tr>
+
+        {% for newsid in filter.qs %}
+            <tr>
+                <td>
+                    {{ newsid.post_had|stop_word }}
+                </td>
+                <td>
+                    {{ newsid.post_auth }}
+                </td>
+                <td>
+                    {{ newsid.post_text|truncatechars:50|stop_word }}
+                </td>
+                <td>
+                    {{ newsid.post_time|date:'d M Y h:m:s' }}
+                </td>
+            </tr>
+            
+        {% endfor %}
+        </table>
+
+
+
+
+<a href="http://127.0.0.1:8000/news/">Home</a>
+
+
+{% endblock content %}
